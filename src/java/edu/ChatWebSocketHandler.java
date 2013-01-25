@@ -104,7 +104,7 @@ public class ChatWebSocketHandler extends WebSocketHandler {
                         // и отправляет сообщение, что подключился новый пользователь
                         webSocket.connection.sendMessage("ati|"
                                 + (webSocket.equals(this)
-                                ? "Вы успешно авторизировались"
+                                ? ("Вы успешно авторизировались как " + userName)
                                 : ("В чат подключился " + userName)));
                     }
                 } catch (IOException x) {

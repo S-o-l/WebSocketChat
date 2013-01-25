@@ -7,9 +7,7 @@ import org.eclipse.jetty.server.handler.DefaultHandler;
 
 public class ChatServerServletContextListener implements ServletContextListener {
     
-    /**
-     * Хранилище сервера Jetty
-     */
+    //Setup Jetty
     private Server server = null;
     
     /**

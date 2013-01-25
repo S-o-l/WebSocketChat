@@ -15,7 +15,8 @@
         <script src="JS/javascript.js"></script>        
         <script>
             var socket;
-            var chatUsers;
+            var chatUsers = {};
+            var colorsNamesArray = new Array("DarkBlue","Blue","Green","DeepSkyBlue","Lime","DodgerBlue","ForestGreen","DarkSlateGrey","MediumSeaGreen","RoyalBlue","DarkSlateBlue","DarkOliveGreen","MediumAquaMarine","DimGrey","OliveDrab","LightSlateGrey","LawnGreen","Maroon","Purple","Olive","BlueViolet","DarkMagenta","YellowGreen","Sienna","Brown","GreenYellow","FireBrick","MediumOrchid","RosyBrown","DarkKhaki","Silver","MediumVioletRed","IndianRed ","Peru","Chocolate","Tan","Orchid","GoldenRod","Crimson","DarkSalmon","Khaki","SandyBrown","Salmon","Red","DeepPink","OrangeRed","Darkorange","Orange","Gold","Yellow");            
             function loadInnerContent() {
                 $("#headerofpage").load("header.html", function() {
                     $("#homemenu").addClass("active");
@@ -35,29 +36,31 @@
                     removeChatWindow();
                 };
                 socket.onmessage = function (event) {
-                    var messageHeader = event.data.substring(0,3);
-                    if (messageHeader = "inf|") $("#messagesPane").append("<em>" + event.data.substring(4) + "</em><br>");
-                    else if (messageHeader = "ati|") {
+                    var messageHeader = event.data.substring(0,4);
+                    if (messageHeader == "inf|") $("#messagesPane").append("<em>" + event.data.substring(4) + "</em><br>");
+                    else if (messageHeader == "ati|") {
                         chatUsers[event.data.substring(22)] = colorsNamesArray[parseInt((Math.random() * (49)), 10)];
+                        console.log("sample color is: " + colorsNamesArray[10]);
+                        console.log("chatUsers name is: " + event.data.substring(22) + " and the color is: " + chatUsers[event.data.substring(22)]);
                         $("#messagesPane").append(event.data.substring(4) + "<br>");
                     }
-                    else if (messageHeader = "ato|") {
-                        chatUsers.splice(jQuery.inArray(event.data.substring(16), chatUsers), 1);
+                    else if (messageHeader == "ato|") {
+                        delete chatUsers[event.data.substring(16)];
                         $("#messagesPane").append(event.data.substring(4) + "<br>");
                     }
-                    else if (messageHeader = "out|") $("#messagesPane").append(event.data.substring(4) + "<br>");
-                    else {
-                        console.log(event.data.substring(4).substring(0, data.indexOf("|", 0) - 1));
-                        var senderName = event.data.substring(4).substring(0, data.indexOf("|", 0) - 1);
-                        var color = jQuery.inArray(senderName, chatUsers)
-                        for (i=0; i<chatUsers.length; i++) {
-                            
+                    else if (messageHeader == "out|") $("#messagesPane").append(event.data.substring(4) + "<br>");
+                    else if (messageHeader == "err|") $("#messagesPane").append(event.data.substring(4) + "<br>");
+                    else if (messageHeader == "in |") {
+                        var senderName = event.data.substring(4).substring(0, event.data.indexOf("|", 5) - 4);
+                        if (chatUsers[senderName] == undefined) {
+                            console.log("is undefined");
+                            chatUsers[senderName] = colorsNamesArray[parseInt((Math.random() * (49)), 10)];
                         }
-                        for (i=0; i<colorsNamesArray.length; i++){
-                            if 
-                        }
+                        var color = chatUsers[senderName];
+                        console.log("sender: " + senderName + " color: " + color);
+                        $("#messagesPane").append("<span style=\"color: " + color + ";\">" + event.data.substring(4) + "</span><br>");
                     }
-
+                    document.getElementById("messagesPane").scrollTop = document.getElementById("messagesPane").scrollHeight;
                 };
             }
             function authorize() {
@@ -65,7 +68,7 @@
             }
             function sendMessage() {
                 socket.send($("#messageInput").val());
-                socket.send($("#messageInput").val(""));
+                $("#messageInput").val("");
             }
             function loadChatWindow() {
                 $("#centerColumn").load("chatwindow.html");
