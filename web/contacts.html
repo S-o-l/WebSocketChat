@@ -1,0 +1,57 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contacts page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="CSS/bootstrap.css" rel="stylesheet">
+        <link href="CSS/bootstrap-responsive.css" rel="stylesheet">
+        <script src="JS/jquery.js"></script>
+        <script src="JS/bootstrap.js"></script>
+
+    <script>
+        function loadheaderofpage() {
+            $("#headerofpage").load("header.html");
+            window.setTimeout("setactive()", 250);
+        }
+        function setactive() {
+            $("#contactsmenu").addClass("active");
+        }
+    </script>
+    </head>
+    <body onload="loadheaderofpage()">
+        <div id="headerofpage">        </div>
+        <div id="contactstext">
+            <h2> My contacts: </h2>
+
+            <p> If you like this demo and ready to make a job-offer (Junior positions are welcome too) or interesting project</p>
+            <p> You can contact me via:</p>
+            <div class="row-fluid">
+                <div class="span3 pagination-centered">
+                    <a class="btn btn-primary" data-toggle="collapse" data-target="#emailCollapse">
+                        <i class="icon-envelope icon-white"></i><br>
+                        <span><strong>Email</strong></span>            
+                    </a>
+                    <div id="emailCollapse" class="collapse"> <a href="mailto:gavrilyukov@gmail.com"><h6>gavrilyukov@gmail.com</h6></a></div>
+                </div>
+                <div class="span3 pagination-centered">
+                    <a class="btn btn-primary" data-toggle="collapse" data-target="#telephoneCollapse">
+                        <i class="icon-user icon-white"></i><br>
+                        <span><strong>Telephone</strong></span>       
+                    </a> 	
+                    <div id="telephoneCollapse" class="collapse"><h6>+380(99)34-34-709</h6></div>
+                </div>
+                <div class="span3 pagination-centered">
+                    <a class="btn btn-primary" data-toggle="collapse" data-target="#linkedinCollapse">
+                        <i class="icon-barcode icon-white"></i><br>
+                        <span><strong>LinkedIn</strong></span>        	
+                    </a>
+                    <div id="linkedinCollapse" class="collapse"><h6><a href="http://ua.linkedin.com/pub/oleg-gavrilyuk/62/68a/5b1/">LinkedIn url</a></h6></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

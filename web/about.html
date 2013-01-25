@@ -1,0 +1,38 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>About page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="CSS/bootstrap.css" rel="stylesheet">
+        <link href="CSS/bootstrap-responsive.css" rel="stylesheet">
+        <script src="JS/jquery.js"></script>
+        <script src="JS/bootstrap.js"></script>
+
+    <script>
+        function loadheaderofpage() {
+            $("#headerofpage").load("header.html");
+            window.setTimeout("setactive()", 250);
+        }
+        function setactive() {
+            $("#aboutmenu").addClass("active");
+        }
+
+
+    </script>
+    </head>
+    <body onload="loadheaderofpage()">
+        <div id="headerofpage">
+        </div>
+        <div id="abouttext">
+            <h2> About this project </h2>
+
+            <p> This is a demo of simple Websocket chat made to qualify knowledge of software development, implementation of modern front-end and back-end technologies and web-design.</p>
+            <p> This demo uses CSS framework Twitter Bootstrap, Javascript and JQuery for front-end and WebSockets with Jetty server for back-end</p>
+            <p>   This project was done basing on course by Nikolay Tkachenko and his training center <a href="http://javanec.kiev.ua">Javanec.kiev.ua</a> that took place on November - December, 2012.
+        </div>
+        </body>
+</html>
