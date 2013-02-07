@@ -24,7 +24,7 @@
                 });
             }
             function chat() {
-                socket = new WebSocket("ws://192.168.0.122:8081/chatdemo");
+                socket = new WebSocket("ws://212.83.63.236:8081/chatdemo");
                 socket.onopen = function () {
                     $("#serverStatus").html("Connected");
                     $("#serverStatus").removeClass("label-warning").removeClass("label-error").addClass("label-success");
